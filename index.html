@@ -1561,10 +1561,7 @@
 
     /* Language switcher — syncs both desktop + mobile pill groups */
     (function () {
-      /* Auto-detect from browser */
-      var browserLang = (navigator.language || 'en').slice(0, 2).toLowerCase();
-      var detectedLang = translations[browserLang] ? browserLang : 'en';
-      setLanguage(detectedLang);
+      setLanguage('en');
 
       document.querySelectorAll('.nav__lang-btn').forEach(function (btn) {
         btn.addEventListener('click', function () {
