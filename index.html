@@ -947,10 +947,228 @@
       #how-it-works { padding: 80px 24px; }
     }
 
-    /* ─── Contact placeholder ────────────────────────────────── */
+    /* ─── Contact ───────────────────────────────────────────── */
     #contact {
-      min-height: 50vh;
+      padding: 140px 48px;
       background: var(--void);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.08), transparent);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .contact-glow-tl { top: -200px; left: -200px; }
+    .contact-glow-br { bottom: -200px; right: -200px; }
+
+    .contact-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-inner h2 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(36px, 5vw, 64px);
+      color: var(--ink);
+      line-height: 1.1;
+      margin-top: 16px;
+    }
+
+    .contact-inner > p {
+      font-family: var(--font-body);
+      font-size: 18px;
+      color: var(--ink-muted);
+      margin-top: 16px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .contact-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 40px;
+    }
+
+    .contact-buttons .btn-primary { padding: 16px 32px; }
+    .contact-buttons .btn-ghost   { padding: 16px 32px; }
+
+    .contact-reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .contact-reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Chat widget */
+    .chat-widget {
+      display: none;
+      margin-top: 40px;
+      background: var(--raised);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      overflow: hidden;
+      text-align: left;
+    }
+
+    .chat-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chat-online-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22C55E;
+      flex-shrink: 0;
+    }
+
+    .chat-header-name {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--ink);
+    }
+
+    .chat-messages {
+      height: 280px;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .chat-messages::-webkit-scrollbar { width: 4px; }
+    .chat-messages::-webkit-scrollbar-track { background: transparent; }
+    .chat-messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+    .bot-message {
+      background: var(--surface);
+      border-radius: 8px 8px 8px 2px;
+      padding: 10px 14px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--ink-muted);
+      max-width: 80%;
+      align-self: flex-start;
+      line-height: 1.5;
+    }
+
+    .user-message {
+      background: var(--flow);
+      color: #fff;
+      border-radius: 8px 8px 2px 8px;
+      padding: 10px 14px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      max-width: 80%;
+      align-self: flex-end;
+      line-height: 1.5;
+    }
+
+    .chat-input-area {
+      padding: 16px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 10px;
+    }
+
+    .chat-input {
+      flex: 1;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 14px;
+      outline: none;
+      transition: border-color var(--transition-fast);
+    }
+
+    .chat-input:focus { border-color: var(--flow); }
+    .chat-input::placeholder { color: var(--ink-muted); }
+
+    .chat-send-btn {
+      flex-shrink: 0;
+      background: var(--flow);
+      color: #fff;
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 14px;
+      transition: background var(--transition-fast);
+    }
+
+    .chat-send-btn:hover { background: var(--flow-deep); }
+
+    @media (max-width: 640px) {
+      #contact { padding: 80px 24px; }
+      .contact-buttons { flex-direction: column; align-items: center; }
+    }
+
+    /* ─── Footer ─────────────────────────────────────────────── */
+    .site-footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-brand {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--ink);
+    }
+
+    .footer-brand-dot { color: var(--flow); }
+
+    .footer-tagline {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--ink-muted);
+      margin-top: 8px;
+    }
+
+    .footer-copy {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--ink-muted);
+    }
+
+    @media (max-width: 640px) {
+      .site-footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
@@ -967,9 +1185,9 @@
 
     <!-- Center nav links -->
     <nav class="nav__links" aria-label="Primary navigation">
-      <a href="#services"    class="nav__link" data-i18n="nav.services">Services</a>
-      <a href="#cases"       class="nav__link" data-i18n="nav.cases">Cases</a>
-      <a href="#contact"     class="nav__link" data-i18n="nav.contact">Contact</a>
+      <a href="#services"    class="nav__link" data-i18n="nav_services">Services</a>
+      <a href="#cases"       class="nav__link" data-i18n="nav_cases">Cases</a>
+      <a href="#contact"     class="nav__link" data-i18n="nav_contact">Contact</a>
     </nav>
 
     <!-- Right controls -->
@@ -980,7 +1198,7 @@
         <button class="nav__lang-btn"        data-lang="ua">UA</button>
         <button class="nav__lang-btn"        data-lang="sk">SK</button>
       </div>
-      <a href="#contact" class="nav__cta" data-i18n="nav.cta">Start project</a>
+      <a href="#contact" class="nav__cta" data-i18n="nav_cta">Start project</a>
     </div>
 
     <!-- Hamburger (mobile) -->
@@ -995,9 +1213,9 @@
   <!-- Mobile dropdown -->
   <div class="nav__mobile-menu" id="mobileMenu" role="dialog" aria-label="Mobile navigation">
     <nav class="nav__mobile-links">
-      <a href="#services"  class="nav__mobile-link" data-i18n="nav.services">Services</a>
-      <a href="#cases"     class="nav__mobile-link" data-i18n="nav.cases">Cases</a>
-      <a href="#contact"   class="nav__mobile-link" data-i18n="nav.contact">Contact</a>
+      <a href="#services"  class="nav__mobile-link" data-i18n="nav_services">Services</a>
+      <a href="#cases"     class="nav__mobile-link" data-i18n="nav_cases">Cases</a>
+      <a href="#contact"   class="nav__mobile-link" data-i18n="nav_contact">Contact</a>
     </nav>
     <div class="nav__mobile-footer">
       <div class="nav__mobile-lang nav__lang" role="group" aria-label="Language selector">
@@ -1006,7 +1224,7 @@
         <button class="nav__lang-btn"        data-lang="ua">UA</button>
         <button class="nav__lang-btn"        data-lang="sk">SK</button>
       </div>
-      <a href="#contact" class="nav__mobile-cta" data-i18n="nav.cta">Start project</a>
+      <a href="#contact" class="nav__mobile-cta" data-i18n="nav_cta">Start project</a>
     </div>
   </div>
 
@@ -1046,22 +1264,17 @@
     <!-- Content -->
     <div class="hero-content">
 
-      <span class="hero-eyebrow reveal reveal-d1">
-        AI Automation Agency&nbsp;&middot;&nbsp;Slovakia
-      </span>
+      <span class="hero-eyebrow reveal reveal-d1" data-i18n="hero_eyebrow">AI Automation Agency · Slovakia</span>
 
       <h1 class="hero-title reveal reveal-d2">
-        Automate what<br>should <span class="gradient-text">flow.</span>
+        <span data-i18n="hero_h1_line1">Automate what</span><br><span data-i18n="hero_h1_line2">should</span> <span class="gradient-text" data-i18n="hero_h1_gradient">flow.</span>
       </h1>
 
-      <p class="hero-sub reveal reveal-d3">
-        We build intelligent systems that capture leads, qualify them with AI,
-        and keep your team focused on what matters.
-      </p>
+      <p class="hero-sub reveal reveal-d3" data-i18n="hero_sub">We build intelligent systems that capture leads, qualify them with AI, and keep your team focused on what matters.</p>
 
       <div class="hero-actions reveal reveal-d4">
-        <a href="#contact" class="btn-primary">Start a project &rarr;</a>
-        <a href="#cases"   class="btn-ghost">See our work</a>
+        <a href="#contact" class="btn-primary" data-i18n="hero_cta1">Start a project →</a>
+        <a href="#cases"   class="btn-ghost"   data-i18n="hero_cta2">See our work</a>
       </div>
 
       <div class="hero-stats reveal reveal-d5" id="heroStats">
@@ -1085,8 +1298,8 @@
   <section id="services" aria-label="Services">
 
     <div class="section-header section-header-reveal" id="servicesHeader">
-      <span class="section-eyebrow">What we build</span>
-      <h2 class="section-title">Intelligent systems for every workflow</h2>
+      <span class="section-eyebrow" data-i18n="services_eyebrow">What we build</span>
+      <h2 class="section-title" data-i18n="services_h2">Intelligent systems for every workflow</h2>
     </div>
 
     <div class="services-grid" id="servicesGrid">
@@ -1133,7 +1346,7 @@
   <section id="cases" aria-label="Cases">
 
     <div class="section-header section-header-reveal" id="casesHeader">
-      <span class="section-eyebrow">Case study</span>
+      <span class="section-eyebrow" data-i18n="cases_eyebrow">Case study</span>
     </div>
 
     <div class="case-study" id="caseStudy">
@@ -1209,7 +1422,45 @@
     </div>
 
   </section>
-  <section id="contact"      aria-label="Contact"></section>
+  <section id="contact" aria-label="Contact">
+
+    <div class="contact-glow contact-glow-tl" aria-hidden="true"></div>
+    <div class="contact-glow contact-glow-br" aria-hidden="true"></div>
+
+    <div class="contact-inner contact-reveal" id="contactInner">
+      <span class="section-eyebrow" data-i18n="contact_eyebrow">Let's work together</span>
+      <h2 data-i18n="contact_h2">Tell us about your project</h2>
+      <p data-i18n="contact_sub">Our AI agent will ask a few questions and send us a brief. No forms, no waiting.</p>
+
+      <div class="contact-buttons">
+        <a href="https://t.me/lumio_dental_bot" target="_blank" rel="noopener noreferrer"
+           class="btn-primary" data-i18n="contact_cta1">Chat in Telegram →</a>
+        <button id="chatToggle" class="btn-ghost" data-i18n="contact_cta2">Chat here</button>
+      </div>
+
+      <div class="chat-widget" id="chatWidget">
+        <div class="chat-header">
+          <div class="chat-online-dot"></div>
+          <span class="chat-header-name">Shudflow AI</span>
+        </div>
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-input-area">
+          <input type="text" class="chat-input" id="chatInput"
+                 placeholder="Type your message..." autocomplete="off" />
+          <button class="chat-send-btn" id="chatSend">Send</button>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <footer class="site-footer" role="contentinfo">
+    <div>
+      <div class="footer-brand">Shudflow<span class="footer-brand-dot">.</span></div>
+      <p class="footer-tagline" data-i18n="footer_tagline">AI automation for businesses that should flow.</p>
+    </div>
+    <p class="footer-copy" data-i18n="footer_copy">© 2026 Shudflow by Vladyslav Shudiehov</p>
+  </footer>
 
   <!-- ─── Scripts ──────────────────────────────────────────── -->
   <script>
@@ -1232,21 +1483,92 @@
       onScroll(); /* run once on load in case page loads mid-scroll */
     })();
 
+    /* ── i18n translations ─────────────────────────────────────── */
+    var translations = {
+      en: {
+        nav_services: 'Services', nav_cases: 'Cases', nav_contact: 'Contact', nav_cta: 'Start project',
+        hero_eyebrow: 'AI Automation Agency · Slovakia',
+        hero_h1_line1: 'Automate what', hero_h1_line2: 'should', hero_h1_gradient: 'flow.',
+        hero_sub: 'We build intelligent systems that capture leads, qualify them with AI, and keep your team focused on what matters.',
+        hero_cta1: 'Start a project →', hero_cta2: 'See our work',
+        services_eyebrow: 'What we build', services_h2: 'Intelligent systems for every workflow',
+        cases_eyebrow: 'Case study',
+        contact_eyebrow: "Let's work together", contact_h2: 'Tell us about your project',
+        contact_sub: 'Our AI agent will ask a few questions and send us a brief. No forms, no waiting.',
+        contact_cta1: 'Chat in Telegram →', contact_cta2: 'Chat here',
+        footer_tagline: 'AI automation for businesses that should flow.',
+        footer_copy: '© 2026 Shudflow by Vladyslav Shudiehov'
+      },
+      ru: {
+        nav_services: 'Услуги', nav_cases: 'Кейсы', nav_contact: 'Контакт', nav_cta: 'Начать проект',
+        hero_eyebrow: 'AI-агентство автоматизации · Словакия',
+        hero_h1_line1: 'Автоматизируй то, что', hero_h1_line2: 'должно', hero_h1_gradient: 'течь.',
+        hero_sub: 'Создаём интеллектуальные системы, которые захватывают лиды, квалифицируют их с помощью AI и позволяют вашей команде сосредоточиться на главном.',
+        hero_cta1: 'Начать проект →', hero_cta2: 'Смотреть работы',
+        services_eyebrow: 'Что мы строим', services_h2: 'Интеллектуальные системы для каждого процесса',
+        cases_eyebrow: 'Кейс',
+        contact_eyebrow: 'Давайте работать вместе', contact_h2: 'Расскажите о своём проекте',
+        contact_sub: 'Наш AI-агент задаст несколько вопросов и пришлёт нам бриф. Никаких форм, никакого ожидания.',
+        contact_cta1: 'Написать в Telegram →', contact_cta2: 'Написать здесь',
+        footer_tagline: 'AI-автоматизация для бизнесов, которые должны течь.',
+        footer_copy: '© 2026 Shudflow от Vladyslav Shudiehov'
+      },
+      ua: {
+        nav_services: 'Послуги', nav_cases: 'Кейси', nav_contact: 'Контакт', nav_cta: 'Почати проект',
+        hero_eyebrow: 'AI-агентство автоматизації · Словаччина',
+        hero_h1_line1: 'Автоматизуй те, що', hero_h1_line2: 'має', hero_h1_gradient: 'текти.',
+        hero_sub: 'Будуємо інтелектуальні системи, які захоплюють ліди, кваліфікують їх за допомогою AI і дозволяють вашій команді зосередитися на головному.',
+        hero_cta1: 'Почати проект →', hero_cta2: 'Дивитись роботи',
+        services_eyebrow: 'Що ми будуємо', services_h2: 'Інтелектуальні системи для кожного процесу',
+        cases_eyebrow: 'Кейс',
+        contact_eyebrow: 'Давайте працювати разом', contact_h2: 'Розкажіть про свій проект',
+        contact_sub: 'Наш AI-агент поставить кілька запитань і надішле нам бриф. Жодних форм, жодного очікування.',
+        contact_cta1: 'Написати в Telegram →', contact_cta2: 'Написати тут',
+        footer_tagline: 'AI-автоматизація для бізнесів, що мають текти.',
+        footer_copy: '© 2026 Shudflow від Vladyslav Shudiehov'
+      },
+      sk: {
+        nav_services: 'Služby', nav_cases: 'Prípady', nav_contact: 'Kontakt', nav_cta: 'Začať projekt',
+        hero_eyebrow: 'AI automatizačná agentúra · Slovensko',
+        hero_h1_line1: 'Automatizuj to, čo', hero_h1_line2: 'má', hero_h1_gradient: 'tiecť.',
+        hero_sub: 'Vytvárame inteligentné systémy, ktoré zachytávajú potenciálnych klientov, kvalifikujú ich pomocou AI a umožňujú vášmu tímu sústrediť sa na podstatné veci.',
+        hero_cta1: 'Začať projekt →', hero_cta2: 'Pozrieť práce',
+        services_eyebrow: 'Čo budujeme', services_h2: 'Inteligentné systémy pre každý proces',
+        cases_eyebrow: 'Prípadová štúdia',
+        contact_eyebrow: 'Poďme spolupracovať', contact_h2: 'Povedzte nám o svojom projekte',
+        contact_sub: 'Náš AI agent položí niekoľko otázok a pošle nám brief. Žiadne formuláre, žiadne čakanie.',
+        contact_cta1: 'Písať na Telegram →', contact_cta2: 'Písať tu',
+        footer_tagline: 'AI automatizácia pre podniky, ktoré majú tiecť.',
+        footer_copy: '© 2026 Shudflow od Vladyslav Shudiehov'
+      }
+    };
+
+    var activeLang = 'en';
+
+    function setLanguage(lang) {
+      if (!translations[lang]) return;
+      activeLang = lang;
+      var t = translations[lang];
+      document.documentElement.lang = lang === 'ua' ? 'uk' : lang;
+      document.querySelectorAll('[data-i18n]').forEach(function (el) {
+        var key = el.dataset.i18n;
+        if (t[key] !== undefined) el.textContent = t[key];
+      });
+      document.querySelectorAll('.nav__lang-btn').forEach(function (b) {
+        b.classList.toggle('active', b.dataset.lang === lang);
+      });
+    }
+
     /* Language switcher — syncs both desktop + mobile pill groups */
     (function () {
-      const allLangBtns = document.querySelectorAll('.nav__lang-btn');
-      let activeLang = 'en';
+      /* Auto-detect from browser */
+      var browserLang = (navigator.language || 'en').slice(0, 2).toLowerCase();
+      var detectedLang = translations[browserLang] ? browserLang : 'en';
+      setLanguage(detectedLang);
 
-      allLangBtns.forEach(function (btn) {
+      document.querySelectorAll('.nav__lang-btn').forEach(function (btn) {
         btn.addEventListener('click', function () {
-          activeLang = btn.dataset.lang;
-
-          allLangBtns.forEach(function (b) {
-            b.classList.toggle('active', b.dataset.lang === activeLang);
-          });
-
-          /* Translations will be wired in Step 6 */
-          document.documentElement.lang = activeLang === 'ua' ? 'uk' : activeLang;
+          setLanguage(btn.dataset.lang);
         });
       });
     })();
@@ -1402,6 +1724,84 @@
           }
         }, { threshold: 0.15 });
         obs.observe(el);
+      });
+    })();
+
+    /* Contact scroll reveal */
+    (function () {
+      var el = document.getElementById('contactInner');
+      if (!el) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        el.classList.add('is-visible');
+        return;
+      }
+      var obs = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) { el.classList.add('is-visible'); obs.disconnect(); }
+      }, { threshold: 0.15 });
+      obs.observe(el);
+    })();
+
+    /* Chat widget */
+    (function () {
+      var toggle    = document.getElementById('chatToggle');
+      var widget    = document.getElementById('chatWidget');
+      var messages  = document.getElementById('chatMessages');
+      var input     = document.getElementById('chatInput');
+      var sendBtn   = document.getElementById('chatSend');
+      if (!toggle || !widget) return;
+
+      var botGreeted = false;
+
+      function scrollDown() {
+        messages.scrollTop = messages.scrollHeight;
+      }
+
+      function addMessage(text, type) {
+        var div = document.createElement('div');
+        div.className = type === 'bot' ? 'bot-message' : 'user-message';
+        div.textContent = text;
+        messages.appendChild(div);
+        scrollDown();
+      }
+
+      function sendMessage() {
+        var text = input.value.trim();
+        if (!text) return;
+        addMessage(text, 'user');
+        input.value = '';
+
+        fetch('https://shudegov1902.app.n8n.cloud/webhook/lead-intake', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: 'Website visitor',
+            message: text,
+            service: 'General inquiry',
+            email: '',
+            phone: ''
+          })
+        }).catch(function () { /* silent — bot reply still shows */ });
+
+        setTimeout(function () {
+          addMessage("Thanks! We'll be in touch soon. Feel free to tell us more about your project.", 'bot');
+        }, 1000);
+      }
+
+      toggle.addEventListener('click', function () {
+        var isOpen = widget.style.display === 'block';
+        widget.style.display = isOpen ? 'none' : 'block';
+
+        if (!isOpen && !botGreeted) {
+          botGreeted = true;
+          setTimeout(function () {
+            addMessage('Hi! I\'m the Shudflow assistant. What kind of business do you run?', 'bot');
+          }, 600);
+        }
+      });
+
+      sendBtn.addEventListener('click', sendMessage);
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') sendMessage();
       });
     })();
   </script>
