@@ -697,18 +697,257 @@
       .services-grid { grid-template-columns: 1fr; }
     }
 
-    /* ─── Other sections (placeholders) ──────────────────────── */
-
+    /* ─── Cases ─────────────────────────────────────────────── */
     #cases {
-      min-height: 60vh;
+      padding: 120px 48px;
       background: var(--void);
     }
 
+    .case-study {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      margin-top: 64px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .case-study.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .case-tag {
+      display: inline-block;
+      border: 1px solid var(--border);
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      color: var(--ink-muted);
+    }
+
+    .case-left h2 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(28px, 3vw, 42px);
+      color: var(--ink);
+      line-height: 1.15;
+      margin-top: 20px;
+    }
+
+    .case-left > p {
+      font-family: var(--font-body);
+      font-size: 16px;
+      color: var(--ink-muted);
+      line-height: 1.7;
+      margin-top: 16px;
+    }
+
+    .case-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .case-features li {
+      display: flex;
+      align-items: center;
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--ink-muted);
+    }
+
+    .check-icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      background: rgba(59, 130, 246, 0.15);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--flow);
+      font-size: 11px;
+      margin-right: 12px;
+    }
+
+    .case-stack {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 32px;
+    }
+
+    .stack-tag {
+      background: var(--raised);
+      border: 1px solid var(--border);
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      color: var(--ink-muted);
+    }
+
+    .case-visual {
+      background: var(--raised);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      aspect-ratio: 16 / 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .case-visual::before,
+    .case-visual::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 56px;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .case-visual::before {
+      top: 0;
+      background: linear-gradient(to bottom, var(--raised), transparent);
+    }
+
+    .case-visual::after {
+      bottom: 0;
+      background: linear-gradient(to top, var(--raised), transparent);
+    }
+
+    .tg-card {
+      background: #17212B;
+      border-radius: 12px;
+      padding: 16px 20px;
+      width: calc(100% - 48px);
+      font-family: var(--font-body);
+      font-size: 13px;
+      line-height: 1.6;
+      color: #E8EDF2;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    .tg-card-header {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 12px;
+      color: #64B5F6;
+      letter-spacing: 0.02em;
+      margin-bottom: 10px;
+    }
+
+    .tg-row {
+      display: flex;
+      gap: 8px;
+      font-size: 12.5px;
+      color: #A8B5C3;
+      padding: 2px 0;
+    }
+
+    .tg-row-em { color: #E8EDF2; }
+
+    .tg-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 11px;
+      color: #8B9BAB;
+    }
+
+    .tg-dot {
+      width: 6px;
+      height: 6px;
+      background: #4CAF50;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ─── How it works ───────────────────────────────────────── */
     #how-it-works {
-      min-height: 40vh;
+      padding: 120px 48px;
       background: var(--surface);
     }
 
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin-top: 64px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .steps-grid.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .step {
+      padding: 40px 32px;
+      border-right: 1px solid var(--border);
+    }
+
+    .step:last-child {
+      border-right: none;
+    }
+
+    .step-number {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 48px;
+      color: rgba(59, 130, 246, 0.2);
+      line-height: 1;
+      display: block;
+    }
+
+    .step h3 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 20px;
+      color: var(--ink);
+      margin-top: 16px;
+    }
+
+    .step p {
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: var(--ink-muted);
+      line-height: 1.65;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 1024px) {
+      .case-study { grid-template-columns: 1fr; gap: 48px; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .step { border-right: none; border-bottom: 1px solid var(--border); padding: 32px 0; }
+      .step:last-child { border-bottom: none; }
+    }
+
+    @media (max-width: 640px) {
+      #cases { padding: 80px 24px; }
+      #how-it-works { padding: 80px 24px; }
+    }
+
+    /* ─── Contact placeholder ────────────────────────────────── */
     #contact {
       min-height: 50vh;
       background: var(--void);
@@ -891,8 +1130,85 @@
     </div>
 
   </section>
-  <section id="cases"        aria-label="Cases"></section>
-  <section id="how-it-works" aria-label="How it works"></section>
+  <section id="cases" aria-label="Cases">
+
+    <div class="section-header section-header-reveal" id="casesHeader">
+      <span class="section-eyebrow">Case study</span>
+    </div>
+
+    <div class="case-study" id="caseStudy">
+
+      <!-- Left — description -->
+      <div class="case-left">
+        <span class="case-tag">Healthcare &middot; Lead Automation</span>
+        <h2>From web form to qualified lead in seconds</h2>
+        <p>Built a full AI-powered lead intake system: multilingual landing page, Telegram AI agent, automated email drafts, calendar events, and a weekly business analytics report — all without auto-sending anything to the client.</p>
+
+        <ul class="case-features">
+          <li><span class="check-icon">✓</span>4-language landing page (RU/UA/EN/SK)</li>
+          <li><span class="check-icon">✓</span>AI triage with priority scoring (High / Medium / Low)</li>
+          <li><span class="check-icon">✓</span>Telegram patient AI agent with memory</li>
+          <li><span class="check-icon">✓</span>Quality Checker before every email draft</li>
+          <li><span class="check-icon">✓</span>Weekly PDF analytics reports</li>
+        </ul>
+
+        <div class="case-stack">
+          <span class="stack-tag">n8n</span>
+          <span class="stack-tag">Claude AI</span>
+          <span class="stack-tag">Telegram</span>
+          <span class="stack-tag">Google Sheets</span>
+          <span class="stack-tag">Gmail</span>
+        </div>
+      </div>
+
+      <!-- Right — Telegram message mockup -->
+      <div class="case-right">
+        <div class="case-visual">
+          <div class="tg-card">
+            <div class="tg-card-header">🆘 HIGH PRIORITY LEAD</div>
+            <div class="tg-row"><span>👤</span><span class="tg-row-em">Alex Morgan</span></div>
+            <div class="tg-row"><span>🦷</span><span>Service: Urgent pain</span></div>
+            <div class="tg-row"><span>💬</span><span>My tooth hurts badly...</span></div>
+            <div class="tg-row"><span>🤖</span><span>AI: Acute inflammation — urgent</span></div>
+            <div class="tg-row tg-row-em"><span>✅</span><span>Next: Call within 30 min</span></div>
+            <div class="tg-badge">
+              <span class="tg-dot"></span>
+              <span>Delivered in 3.2s</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <section id="how-it-works" aria-label="How it works">
+
+    <div class="section-header section-header-reveal" id="howHeader">
+      <span class="section-eyebrow">Process</span>
+      <h2 class="section-title">How it works</h2>
+    </div>
+
+    <div class="steps-grid" id="stepsGrid">
+      <div class="step">
+        <span class="step-number">01</span>
+        <h3>Discovery call</h3>
+        <p>We learn your business, pain points, and goals. 30 minutes, no fluff.</p>
+      </div>
+      <div class="step">
+        <span class="step-number">02</span>
+        <h3>We build</h3>
+        <p>Custom AI workflow built in n8n. Tested thoroughly. Reviewed with you before launch.</p>
+      </div>
+      <div class="step">
+        <span class="step-number">03</span>
+        <h3>You flow</h3>
+        <p>Your system runs 24/7. We monitor, support, and improve it over time.</p>
+      </div>
+    </div>
+
+  </section>
   <section id="contact"      aria-label="Contact"></section>
 
   <!-- ─── Scripts ──────────────────────────────────────────── -->
@@ -1060,6 +1376,33 @@
       }, { threshold: 0.1 });
 
       gridObserver.observe(grid);
+    })();
+
+    /* Cases + How-it-works scroll reveal */
+    (function () {
+      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      var targets = [
+        document.getElementById('casesHeader'),
+        document.getElementById('caseStudy'),
+        document.getElementById('howHeader'),
+        document.getElementById('stepsGrid')
+      ].filter(Boolean);
+
+      if (prefersReduced) {
+        targets.forEach(function (el) { el.classList.add('is-visible'); });
+        return;
+      }
+
+      targets.forEach(function (el) {
+        var obs = new IntersectionObserver(function (entries) {
+          if (entries[0].isIntersecting) {
+            el.classList.add('is-visible');
+            obs.disconnect();
+          }
+        }, { threshold: 0.15 });
+        obs.observe(el);
+      });
     })();
   </script>
 
