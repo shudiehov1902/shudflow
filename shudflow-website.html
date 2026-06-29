@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en" color-scheme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Shudflow — automation workflows and digital solutions that move your business forward." />
+  <meta property="og:title" content="Shudflow" />
+  <meta property="og:description" content="Automation workflows and digital solutions that move your business forward." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://shudflow.com" />
+  <title>Shudflow</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Tokens ─────────────────────────────────────────────── */
+    :root {
+      /* Colors */
+      --void:       #06080D;
+      --surface:    #0D1117;
+      --raised:     #131920;
+      --border:     #1C2535;
+      --ink:        #DDE3F0;
+      --ink-muted:  #5B6B8A;
+      --flow:       #3B82F6;
+      --flow-deep:  #6366F1;
+      --glow:       rgba(59, 130, 246, 0.12);
+
+      /* Typography */
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-body:    'Inter', sans-serif;
+
+      /* Spacing scale */
+      --space-1:  4px;
+      --space-2:  8px;
+      --space-3:  12px;
+      --space-4:  16px;
+      --space-5:  20px;
+      --space-6:  24px;
+      --space-8:  32px;
+      --space-10: 40px;
+      --space-12: 48px;
+      --space-16: 64px;
+
+      /* Radius */
+      --radius-sm:  4px;
+      --radius-md:  8px;
+      --radius-lg:  12px;
+      --radius-xl:  20px;
+      --radius-pill: 999px;
+
+      /* Transitions */
+      --transition-fast:   150ms ease;
+      --transition-base:   250ms ease;
+      --transition-slow:   400ms ease;
+    }
+
+    /* ─── Reset ──────────────────────────────────────────────── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      color-scheme: dark;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--ink);
+      background-color: var(--void);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul, ol {
+      list-style: none;
+    }
+
+    button {
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    img, svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    /* ─── Navbar ─────────────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 0 var(--space-8);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: transparent;
+      border-bottom: 1px solid transparent;
+      transition:
+        background var(--transition-base),
+        border-color var(--transition-base),
+        backdrop-filter var(--transition-base);
+
+      /* Entrance animation */
+      animation: navFadeIn 0.6s ease both;
+    }
+
+    @keyframes navFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .nav.scrolled {
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(6, 8, 13, 0.85);
+      border-bottom-color: var(--border);
+    }
+
+    /* Logo */
+    .nav__logo {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 1px;
+      flex-shrink: 0;
+    }
+
+    .nav__logo-dot {
+      color: var(--flow);
+      line-height: 1;
+    }
+
+    /* Center links */
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: var(--space-8);
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .nav__link {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--ink-muted);
+      position: relative;
+      transition: color var(--transition-fast);
+    }
+
+    .nav__link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--ink);
+      transition: width var(--transition-fast);
+    }
+
+    .nav__link:hover {
+      color: var(--ink);
+    }
+
+    .nav__link:hover::after {
+      width: 100%;
+    }
+
+    /* Right controls */
+    .nav__controls {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      flex-shrink: 0;
+    }
+
+    /* Language switcher */
+    .nav__lang {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+    }
+
+    .nav__lang-btn {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      color: var(--ink-muted);
+      padding: var(--space-1) var(--space-2);
+      border-radius: var(--radius-pill);
+      border: 1px solid transparent;
+      transition:
+        color var(--transition-fast),
+        background var(--transition-fast),
+        border-color var(--transition-fast);
+    }
+
+    .nav__lang-btn:hover {
+      color: var(--ink);
+      border-color: var(--border);
+    }
+
+    .nav__lang-btn.active {
+      color: #fff;
+      background: var(--flow);
+      border-color: var(--flow);
+    }
+
+    /* CTA button */
+    .nav__cta {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 14px;
+      color: #fff;
+      background: var(--flow);
+      padding: var(--space-2) var(--space-5);
+      border-radius: var(--radius-md);
+      transition:
+        background var(--transition-fast),
+        box-shadow var(--transition-fast);
+    }
+
+    .nav__cta:hover {
+      background: var(--flow-deep);
+      box-shadow: 0 0 0 3px var(--glow);
+    }
+
+    /* Hamburger */
+    .nav__hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 28px;
+      height: 28px;
+      padding: 2px;
+    }
+
+    .nav__hamburger span {
+      display: block;
+      height: 2px;
+      background: var(--ink);
+      border-radius: 2px;
+      transition:
+        transform var(--transition-base),
+        opacity var(--transition-base);
+      transform-origin: center;
+    }
+
+    .nav__hamburger.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .nav__hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav__hamburger.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Mobile dropdown */
+    .nav__mobile-menu {
+      display: none;
+      position: fixed;
+      top: 64px;
+      left: 0;
+      right: 0;
+      background: rgba(6, 8, 13, 0.97);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: var(--space-6) var(--space-8);
+      flex-direction: column;
+      gap: var(--space-6);
+      z-index: 99;
+
+      animation: mobileMenuIn 0.25s ease both;
+    }
+
+    @keyframes mobileMenuIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .nav__mobile-menu.open {
+      display: flex;
+    }
+
+    .nav__mobile-links {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+    }
+
+    .nav__mobile-link {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 16px;
+      color: var(--ink-muted);
+      transition: color var(--transition-fast);
+    }
+
+    .nav__mobile-link:hover {
+      color: var(--ink);
+    }
+
+    .nav__mobile-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--border);
+    }
+
+    .nav__mobile-lang {
+      display: flex;
+      gap: var(--space-1);
+    }
+
+    .nav__mobile-cta {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 14px;
+      color: #fff;
+      background: var(--flow);
+      padding: var(--space-2) var(--space-5);
+      border-radius: var(--radius-md);
+    }
+
+    /* ─── Responsive ─────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .nav__links,
+      .nav__controls {
+        display: none;
+      }
+
+      .nav__hamburger {
+        display: flex;
+      }
+    }
+
+    /* ─── Placeholder sections ───────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      background: var(--void);
+      padding-top: 64px;
+    }
+
+    #services {
+      min-height: 60vh;
+      background: var(--surface);
+    }
+
+    #cases {
+      min-height: 60vh;
+      background: var(--void);
+    }
+
+    #how-it-works {
+      min-height: 40vh;
+      background: var(--surface);
+    }
+
+    #contact {
+      min-height: 50vh;
+      background: var(--void);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ─── Navbar ────────────────────────────────────────────── -->
+  <header class="nav" id="nav" role="banner">
+
+    <!-- Logo -->
+    <a href="#hero" class="nav__logo" aria-label="Shudflow home">
+      Shudflow<span class="nav__logo-dot">.</span>
+    </a>
+
+    <!-- Center nav links -->
+    <nav class="nav__links" aria-label="Primary navigation">
+      <a href="#services"    class="nav__link" data-i18n="nav.services">Services</a>
+      <a href="#cases"       class="nav__link" data-i18n="nav.cases">Cases</a>
+      <a href="#contact"     class="nav__link" data-i18n="nav.contact">Contact</a>
+    </nav>
+
+    <!-- Right controls -->
+    <div class="nav__controls">
+      <div class="nav__lang" role="group" aria-label="Language selector">
+        <button class="nav__lang-btn active" data-lang="en">EN</button>
+        <button class="nav__lang-btn"        data-lang="ru">RU</button>
+        <button class="nav__lang-btn"        data-lang="ua">UA</button>
+        <button class="nav__lang-btn"        data-lang="sk">SK</button>
+      </div>
+      <a href="#contact" class="nav__cta" data-i18n="nav.cta">Start project</a>
+    </div>
+
+    <!-- Hamburger (mobile) -->
+    <button class="nav__hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+  </header>
+
+  <!-- Mobile dropdown -->
+  <div class="nav__mobile-menu" id="mobileMenu" role="dialog" aria-label="Mobile navigation">
+    <nav class="nav__mobile-links">
+      <a href="#services"  class="nav__mobile-link" data-i18n="nav.services">Services</a>
+      <a href="#cases"     class="nav__mobile-link" data-i18n="nav.cases">Cases</a>
+      <a href="#contact"   class="nav__mobile-link" data-i18n="nav.contact">Contact</a>
+    </nav>
+    <div class="nav__mobile-footer">
+      <div class="nav__mobile-lang nav__lang" role="group" aria-label="Language selector">
+        <button class="nav__lang-btn active" data-lang="en">EN</button>
+        <button class="nav__lang-btn"        data-lang="ru">RU</button>
+        <button class="nav__lang-btn"        data-lang="ua">UA</button>
+        <button class="nav__lang-btn"        data-lang="sk">SK</button>
+      </div>
+      <a href="#contact" class="nav__mobile-cta" data-i18n="nav.cta">Start project</a>
+    </div>
+  </div>
+
+  <!-- ─── Placeholder sections ─────────────────────────────── -->
+  <section id="hero"         aria-label="Hero"></section>
+  <section id="services"     aria-label="Services"></section>
+  <section id="cases"        aria-label="Cases"></section>
+  <section id="how-it-works" aria-label="How it works"></section>
+  <section id="contact"      aria-label="Contact"></section>
+
+  <!-- ─── Scripts ──────────────────────────────────────────── -->
+  <script>
+    /* Navbar scroll handler */
+    (function () {
+      const nav = document.getElementById('nav');
+      let ticking = false;
+
+      function onScroll() {
+        if (!ticking) {
+          requestAnimationFrame(function () {
+            nav.classList.toggle('scrolled', window.scrollY > 8);
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll(); /* run once on load in case page loads mid-scroll */
+    })();
+
+    /* Language switcher — syncs both desktop + mobile pill groups */
+    (function () {
+      const allLangBtns = document.querySelectorAll('.nav__lang-btn');
+      let activeLang = 'en';
+
+      allLangBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          activeLang = btn.dataset.lang;
+
+          allLangBtns.forEach(function (b) {
+            b.classList.toggle('active', b.dataset.lang === activeLang);
+          });
+
+          /* Translations will be wired in Step 6 */
+          document.documentElement.lang = activeLang === 'ua' ? 'uk' : activeLang;
+        });
+      });
+    })();
+
+    /* Hamburger / mobile menu toggle */
+    (function () {
+      const hamburger  = document.getElementById('hamburger');
+      const mobileMenu = document.getElementById('mobileMenu');
+
+      function setOpen(open) {
+        hamburger.classList.toggle('open', open);
+        mobileMenu.classList.toggle('open', open);
+        hamburger.setAttribute('aria-expanded', String(open));
+      }
+
+      hamburger.addEventListener('click', function () {
+        setOpen(!hamburger.classList.contains('open'));
+      });
+
+      /* Close menu when a mobile link is clicked */
+      mobileMenu.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () { setOpen(false); });
+      });
+
+      /* Close on outside click */
+      document.addEventListener('click', function (e) {
+        if (
+          hamburger.classList.contains('open') &&
+          !hamburger.contains(e.target) &&
+          !mobileMenu.contains(e.target)
+        ) {
+          setOpen(false);
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>
