@@ -578,11 +578,126 @@
       .hero-stats { gap: 32px; }
     }
 
-    /* ─── Other sections (placeholders) ──────────────────────── */
+    /* ─── Services ──────────────────────────────────────────── */
     #services {
-      min-height: 60vh;
+      padding: 120px 48px;
       background: var(--surface);
     }
+
+    .section-header {
+      max-width: 600px;
+      margin-bottom: 64px;
+    }
+
+    .section-eyebrow {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      color: var(--flow);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(32px, 4vw, 52px);
+      color: var(--ink);
+      line-height: 1.1;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .service-card {
+      background: var(--raised);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(30px);
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(59, 130, 246, 0.15);
+      border-color: var(--flow);
+    }
+
+    .service-card:hover::before {
+      opacity: 1;
+    }
+
+    .service-card.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .service-icon {
+      font-size: 32px;
+      line-height: 1;
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    .service-card h3 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 18px;
+      color: var(--ink);
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    .service-card p {
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--ink-muted);
+      line-height: 1.65;
+      position: relative;
+    }
+
+    .section-header-reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .section-header-reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 640px) {
+      #services { padding: 80px 24px; }
+      .services-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ─── Other sections (placeholders) ──────────────────────── */
 
     #cases {
       min-height: 60vh;
@@ -728,7 +843,54 @@
     </div>
 
   </section>
-  <section id="services"     aria-label="Services"></section>
+  <section id="services" aria-label="Services">
+
+    <div class="section-header section-header-reveal" id="servicesHeader">
+      <span class="section-eyebrow">What we build</span>
+      <h2 class="section-title">Intelligent systems for every workflow</h2>
+    </div>
+
+    <div class="services-grid" id="servicesGrid">
+
+      <div class="service-card">
+        <span class="service-icon">🤖</span>
+        <h3>AI Lead Agents</h3>
+        <p>Capture, qualify and route leads automatically. Zero missed requests.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-icon">💬</span>
+        <h3>Telegram Bots</h3>
+        <p>Conversational AI for client intake, FAQ, and appointment booking.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-icon">⚡</span>
+        <h3>Process Automation</h3>
+        <p>Connect your tools. Eliminate copy-paste. Run on autopilot.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-icon">📊</span>
+        <h3>Analytics &amp; Reports</h3>
+        <p>Weekly PDF reports with AI insights. Delivered to your Telegram.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-icon">🔗</span>
+        <h3>CRM Integration</h3>
+        <p>Google Sheets, Notion, Airtable — synced automatically.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-icon">🧠</span>
+        <h3>Custom AI Workflows</h3>
+        <p>n8n-powered pipelines built specifically for your business.</p>
+      </div>
+
+    </div>
+
+  </section>
   <section id="cases"        aria-label="Cases"></section>
   <section id="how-it-works" aria-label="How it works"></section>
   <section id="contact"      aria-label="Contact"></section>
@@ -861,6 +1023,43 @@
       }, { threshold: 0.3 });
 
       observer.observe(statsEl);
+    })();
+
+    /* Services scroll reveal — header + staggered cards */
+    (function () {
+      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var header = document.getElementById('servicesHeader');
+      var grid   = document.getElementById('servicesGrid');
+      if (!grid) return;
+
+      var cards = Array.prototype.slice.call(grid.querySelectorAll('.service-card'));
+
+      if (prefersReduced) {
+        if (header) header.classList.add('is-visible');
+        cards.forEach(function (c) { c.classList.add('is-visible'); });
+        return;
+      }
+
+      var headerObserver = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) {
+          header.classList.add('is-visible');
+          headerObserver.disconnect();
+        }
+      }, { threshold: 0.2 });
+      if (header) headerObserver.observe(header);
+
+      var gridObserver = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) {
+          cards.forEach(function (card, i) {
+            setTimeout(function () {
+              card.classList.add('is-visible');
+            }, i * 100);
+          });
+          gridObserver.disconnect();
+        }
+      }, { threshold: 0.1 });
+
+      gridObserver.observe(grid);
     })();
   </script>
 
