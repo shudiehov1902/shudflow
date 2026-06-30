@@ -578,6 +578,75 @@
       .hero-stats { gap: 32px; }
     }
 
+    /* ─── About ─────────────────────────────────────────────── */
+    #about {
+      padding: 100px 48px;
+      background: var(--void);
+    }
+
+    .about-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 40% 60%;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .about-photo-placeholder {
+      width: 320px;
+      height: 400px;
+      max-width: 100%;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: var(--raised);
+    }
+
+    .about-eyebrow {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      color: var(--flow);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    .about-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(28px, 3vw, 40px);
+      color: var(--ink);
+      line-height: 1.15;
+    }
+
+    .about-text {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 16px;
+      color: var(--ink-muted);
+      line-height: 1.7;
+      margin-top: 16px;
+    }
+
+    .about-location {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--ink-muted);
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    @media (max-width: 768px) {
+      #about { padding: 80px 24px; }
+      .about-grid { grid-template-columns: 1fr; gap: 32px; }
+      .about-photo-placeholder { margin: 0 auto; }
+    }
+
     /* ─── Services ──────────────────────────────────────────── */
     #services {
       padding: 120px 48px;
@@ -1170,6 +1239,27 @@
     @media (max-width: 640px) {
       .site-footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
     }
+
+    /* ─── Custom cursor ─────────────────────────────────────── */
+    #custom-cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--flow);
+      opacity: 0.6;
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: difference;
+      transform: translate(-50%, -50%);
+      will-change: transform;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #custom-cursor { display: none !important; }
+    }
   </style>
 </head>
 
@@ -1264,7 +1354,7 @@
     <!-- Content -->
     <div class="hero-content">
 
-      <span class="hero-eyebrow reveal reveal-d1" data-i18n="hero_eyebrow">AI Automation Agency · Slovakia</span>
+      <span class="hero-eyebrow reveal reveal-d1" data-i18n="hero_eyebrow">AI Automation Agency</span>
 
       <h1 class="hero-title reveal reveal-d2">
         <span data-i18n="hero_h1_line1">Automate what</span><br><span data-i18n="hero_h1_line2">should</span> <span class="gradient-text" data-i18n="hero_h1_gradient">flow.</span>
@@ -1294,6 +1384,20 @@
 
     </div>
 
+  </section>
+  <section id="about" aria-label="About">
+    <div class="about-grid">
+      <div class="about-photo-placeholder" id="founder-photo"></div>
+      <div class="about-content">
+        <span class="about-eyebrow" data-i18n="about_eyebrow">Who's behind this</span>
+        <h2 class="about-title" data-i18n="about_h2">Hi, I'm Vladyslav.</h2>
+        <p class="about-text" data-i18n="about_text">I'm a software engineer turned automation builder. I started Shudflow because I kept seeing the same problem: small businesses losing leads simply because no one could respond fast enough. I build systems that fix exactly that — fast, reliable, and always reviewed by a human before anything goes out.</p>
+        <div class="about-location">
+          <span aria-hidden="true">📍</span>
+          <span data-i18n="about_location">Based in Bratislava · Working with businesses worldwide</span>
+        </div>
+      </div>
+    </div>
   </section>
   <section id="services" aria-label="Services">
 
@@ -1433,7 +1537,7 @@
       <p data-i18n="contact_sub">Our AI agent will ask a few questions and send us a brief. No forms, no waiting.</p>
 
       <div class="contact-buttons">
-        <a href="https://t.me/lumio_dental_bot" target="_blank" rel="noopener noreferrer"
+        <a href="https://t.me/shudflow_assistant_bot" target="_blank" rel="noopener noreferrer"
            class="btn-primary" data-i18n="contact_cta1">Chat in Telegram →</a>
         <button id="chatToggle" class="btn-ghost" data-i18n="contact_cta2">Chat here</button>
       </div>
@@ -1487,10 +1591,13 @@
     var translations = {
       en: {
         nav_services: 'Services', nav_cases: 'Cases', nav_contact: 'Contact', nav_cta: 'Start project',
-        hero_eyebrow: 'AI Automation Agency · Slovakia',
+        hero_eyebrow: 'AI Automation Agency',
         hero_h1_line1: 'Automate what', hero_h1_line2: 'should', hero_h1_gradient: 'flow.',
         hero_sub: 'We build intelligent systems that capture leads, qualify them with AI, and keep your team focused on what matters.',
         hero_cta1: 'Start a project →', hero_cta2: 'See our work',
+        about_eyebrow: "Who's behind this", about_h2: "Hi, I'm Vladyslav.",
+        about_text: "I'm a software engineer turned automation builder. I started Shudflow because I kept seeing the same problem: small businesses losing leads simply because no one could respond fast enough. I build systems that fix exactly that — fast, reliable, and always reviewed by a human before anything goes out.",
+        about_location: 'Based in Bratislava · Working with businesses worldwide',
         services_eyebrow: 'What we build', services_h2: 'Intelligent systems for every workflow',
         cases_eyebrow: 'Case study',
         contact_eyebrow: "Let's work together", contact_h2: 'Tell us about your project',
@@ -1501,10 +1608,13 @@
       },
       ru: {
         nav_services: 'Услуги', nav_cases: 'Кейсы', nav_contact: 'Контакт', nav_cta: 'Начать проект',
-        hero_eyebrow: 'AI-агентство автоматизации · Словакия',
+        hero_eyebrow: 'AI-агентство автоматизации',
         hero_h1_line1: 'Автоматизируй то, что', hero_h1_line2: 'должно', hero_h1_gradient: 'течь.',
         hero_sub: 'Создаём интеллектуальные системы, которые захватывают лиды, квалифицируют их с помощью AI и позволяют вашей команде сосредоточиться на главном.',
         hero_cta1: 'Начать проект →', hero_cta2: 'Смотреть работы',
+        about_eyebrow: 'Кто за этим стоит', about_h2: 'Привет, я Владислав.',
+        about_text: 'Я инженер-программист, который стал строителем автоматизации. Я основал Shudflow, потому что постоянно видел одну и ту же проблему: малый бизнес теряет лиды просто потому, что никто не успевает ответить достаточно быстро. Я создаю системы, которые решают именно это — быстро, надёжно и всегда с проверкой человеком перед тем, как что-либо отправляется клиенту.',
+        about_location: 'Базируюсь в Братиславе · Работаю с бизнесами по всему миру',
         services_eyebrow: 'Что мы строим', services_h2: 'Интеллектуальные системы для каждого процесса',
         cases_eyebrow: 'Кейс',
         contact_eyebrow: 'Давайте работать вместе', contact_h2: 'Расскажите о своём проекте',
@@ -1515,10 +1625,13 @@
       },
       ua: {
         nav_services: 'Послуги', nav_cases: 'Кейси', nav_contact: 'Контакт', nav_cta: 'Почати проект',
-        hero_eyebrow: 'AI-агентство автоматизації · Словаччина',
+        hero_eyebrow: 'AI-агентство автоматизації',
         hero_h1_line1: 'Автоматизуй те, що', hero_h1_line2: 'має', hero_h1_gradient: 'текти.',
         hero_sub: 'Будуємо інтелектуальні системи, які захоплюють ліди, кваліфікують їх за допомогою AI і дозволяють вашій команді зосередитися на головному.',
         hero_cta1: 'Почати проект →', hero_cta2: 'Дивитись роботи',
+        about_eyebrow: 'Хто за цим стоїть', about_h2: 'Привіт, я Владислав.',
+        about_text: 'Я інженер-програміст, який став будівничим автоматизації. Я заснував Shudflow, бо постійно бачив одну й ту саму проблему: малий бізнес втрачає ліди просто тому, що ніхто не встигає відповісти достатньо швидко. Я створюю системи, які вирішують саме це — швидко, надійно і завжди з перевіркою людиною перед тим, як щось надсилається клієнту.',
+        about_location: 'Базуюся в Братиславі · Працюю з бізнесами по всьому світу',
         services_eyebrow: 'Що ми будуємо', services_h2: 'Інтелектуальні системи для кожного процесу',
         cases_eyebrow: 'Кейс',
         contact_eyebrow: 'Давайте працювати разом', contact_h2: 'Розкажіть про свій проект',
@@ -1529,10 +1642,13 @@
       },
       sk: {
         nav_services: 'Služby', nav_cases: 'Prípady', nav_contact: 'Kontakt', nav_cta: 'Začať projekt',
-        hero_eyebrow: 'AI automatizačná agentúra · Slovensko',
+        hero_eyebrow: 'AI automatizačná agentúra',
         hero_h1_line1: 'Automatizuj to, čo', hero_h1_line2: 'má', hero_h1_gradient: 'tiecť.',
         hero_sub: 'Vytvárame inteligentné systémy, ktoré zachytávajú potenciálnych klientov, kvalifikujú ich pomocou AI a umožňujú vášmu tímu sústrediť sa na podstatné veci.',
         hero_cta1: 'Začať projekt →', hero_cta2: 'Pozrieť práce',
+        about_eyebrow: 'Kto za tým stojí', about_h2: 'Ahoj, som Vladyslav.',
+        about_text: 'Som softvérový inžinier, ktorý sa stal staviteľom automatizácie. Založil som Shudflow, pretože som stále videl ten istý problém: malé firmy strácajú potenciálnych klientov len preto, že nikto nestihne odpovedať dostatočne rýchlo. Vytváram systémy, ktoré presne to riešia — rýchlo, spoľahlivo a vždy skontrolované človekom, kým niečo odíde von.',
+        about_location: 'Sídlim v Bratislave · Spolupracujem s firmami z celého sveta',
         services_eyebrow: 'Čo budujeme', services_h2: 'Inteligentné systémy pre každý proces',
         cases_eyebrow: 'Prípadová štúdia',
         contact_eyebrow: 'Poďme spolupracovať', contact_h2: 'Povedzte nám o svojom projekte',
@@ -1789,6 +1905,71 @@
       sendBtn.addEventListener('click', sendMessage);
       input.addEventListener('keydown', function (e) {
         if (e.key === 'Enter') sendMessage();
+      });
+    })();
+
+    /* Custom lerp cursor */
+    (function () {
+      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var isTouch = window.matchMedia('(pointer: coarse)').matches;
+      if (prefersReduced || isTouch) return;
+
+      var cursor = document.createElement('div');
+      cursor.id = 'custom-cursor';
+      document.body.appendChild(cursor);
+
+      var mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+      var cursorX = mouseX, cursorY = mouseY;
+
+      window.addEventListener('mousemove', function (e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      function animate() {
+        cursorX += (mouseX - cursorX) * 0.1;
+        cursorY += (mouseY - cursorY) * 0.1;
+        cursor.style.transform = 'translate(' + cursorX + 'px, ' + cursorY + 'px) translate(-50%, -50%)';
+        requestAnimationFrame(animate);
+      }
+      requestAnimationFrame(animate);
+    })();
+
+    /* Magnetic buttons */
+    (function () {
+      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReduced) return;
+
+      var radius = 60;
+      var maxOffset = 8;
+
+      document.querySelectorAll('.btn-primary').forEach(function (btn) {
+        var parent = btn.parentElement;
+        if (!parent) return;
+
+        btn.style.transition = 'transform 0.3s ease';
+
+        parent.addEventListener('mousemove', function (e) {
+          var rect = btn.getBoundingClientRect();
+          var cx = rect.left + rect.width / 2;
+          var cy = rect.top + rect.height / 2;
+          var dx = e.clientX - cx;
+          var dy = e.clientY - cy;
+          var dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < radius) {
+            var pull = (1 - dist / radius);
+            var offsetX = (dx / radius) * maxOffset * pull;
+            var offsetY = (dy / radius) * maxOffset * pull;
+            btn.style.transform = 'translate(' + offsetX + 'px, ' + offsetY + 'px)';
+          } else {
+            btn.style.transform = '';
+          }
+        });
+
+        parent.addEventListener('mouseleave', function () {
+          btn.style.transform = '';
+        });
       });
     })();
   </script>
