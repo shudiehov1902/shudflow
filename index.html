@@ -1854,6 +1854,8 @@
       if (!toggle || !widget) return;
 
       var botGreeted = false;
+      var sessionId  = null;
+      var typingEl   = null;
 
       function scrollDown() {
         messages.scrollTop = messages.scrollHeight;
@@ -1867,27 +1869,45 @@
         scrollDown();
       }
 
+      function showTyping() {
+        typingEl = document.createElement('div');
+        typingEl.className = 'bot-message';
+        typingEl.textContent = 'Shudflow AI is typing...';
+        messages.appendChild(typingEl);
+        scrollDown();
+      }
+
+      function hideTyping() {
+        if (typingEl) {
+          typingEl.remove();
+          typingEl = null;
+        }
+      }
+
       function sendMessage() {
         var text = input.value.trim();
         if (!text) return;
         addMessage(text, 'user');
         input.value = '';
+        showTyping();
 
-        fetch('https://shudegov1902.app.n8n.cloud/webhook/lead-intake', {
+        fetch('https://shudegov1902.app.n8n.cloud/webhook/shudflow-web-chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            name: 'Website visitor',
             message: text,
-            service: 'General inquiry',
-            email: '',
-            phone: ''
+            sessionId: sessionId
           })
-        }).catch(function () { /* silent — bot reply still shows */ });
-
-        setTimeout(function () {
-          addMessage("Thanks! We'll be in touch soon. Feel free to tell us more about your project.", 'bot');
-        }, 1000);
+        })
+          .then(function (res) { return res.json(); })
+          .then(function (data) {
+            hideTyping();
+            addMessage(data.reply, 'bot');
+          })
+          .catch(function () {
+            hideTyping();
+            addMessage('Sorry, something went wrong. Try the Telegram chat instead, or refresh the page.', 'bot');
+          });
       }
 
       toggle.addEventListener('click', function () {
@@ -1896,6 +1916,9 @@
 
         if (!isOpen && !botGreeted) {
           botGreeted = true;
+          sessionId = (typeof crypto !== 'undefined' && crypto.randomUUID)
+            ? crypto.randomUUID()
+            : (Date.now() + '-' + Math.random());
           setTimeout(function () {
             addMessage('Hi! I\'m the Shudflow assistant. What kind of business do you run?', 'bot');
           }, 600);
