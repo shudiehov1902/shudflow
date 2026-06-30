@@ -9,6 +9,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://shudflow.com" />
   <title>Shudflow</title>
+  <link rel="icon" type="image/png" href="shudflow-logo.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -593,15 +594,6 @@
       align-items: center;
     }
 
-    .about-photo-placeholder {
-      width: 320px;
-      height: 400px;
-      max-width: 100%;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      background: var(--raised);
-    }
-
     .about-eyebrow {
       font-family: var(--font-body);
       font-weight: 500;
@@ -644,7 +636,7 @@
     @media (max-width: 768px) {
       #about { padding: 80px 24px; }
       .about-grid { grid-template-columns: 1fr; gap: 32px; }
-      .about-photo-placeholder { margin: 0 auto; }
+      #founder-photo { margin: 0 auto; }
     }
 
     /* ─── Services ──────────────────────────────────────────── */
@@ -1270,6 +1262,7 @@
 
     <!-- Logo -->
     <a href="#hero" class="nav__logo" aria-label="Shudflow home">
+      <img src="shudflow-logo.png" alt="Shudflow" style="height: 28px; width: auto; margin-right: 8px;">
       Shudflow<span class="nav__logo-dot">.</span>
     </a>
 
@@ -1387,7 +1380,7 @@
   </section>
   <section id="about" aria-label="About">
     <div class="about-grid">
-      <div class="about-photo-placeholder" id="founder-photo"></div>
+      <img src="founder-photo.png" alt="Vladyslav Shudiehov, founder of Shudflow" id="founder-photo" style="width: 100%; max-width: 320px; height: auto; border-radius: 16px; border: 1px solid var(--border); display: block;">
       <div class="about-content">
         <span class="about-eyebrow" data-i18n="about_eyebrow">Who's behind this</span>
         <h2 class="about-title" data-i18n="about_h2">Hi, I'm Vladyslav.</h2>
